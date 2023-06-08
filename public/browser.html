@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>hash路由</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <ul>
+    <li><a onclick="go('/a')">/a</a></li>
+    <li><a onclick="go('/b')">/b</a></li>
+    <li><a onclick="go('/c')">/c</a></li>
+    <li><a onclick="forward()">前进</a></li>
+    <li><a onclick="back()">后退</a></li>
+  </ul>
+  <script>
+
+    function render() {
+      root.innerHTML = window.location.pathname;
+    }
+    //只有当你前进后退的时候会触发，pushState不会触发
+    window.onpopstate = render;
+    let historyObj = window.history;
+    let oldPushState = historyObj.pushState;
+    //
+    historyObj.pushState = function (state, title, url) {
+      oldPushState.apply(historyObj, arguments);
+      render();
+    }
+    function go(path) {
+      historyObj.pushState({ path }, null, path);
+    }
+    function forward() {
+      historyObj.go(1);
+      //historyObj.forward();
+    }
+    function back(path) {
+      historyObj.go(-1);
+      //historyObj.back();
+    }
+
+  </script>
+</body>
+
+</html>
