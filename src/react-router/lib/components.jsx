@@ -7,7 +7,6 @@ import React from "react"
  * @returns
  */
 export function Router({ children, location, navigator, navigationType }) {
-  console.log("children=1111>", children)
   return children
 }
 
