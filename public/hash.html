@@ -21,6 +21,7 @@
   <script>
     window.addEventListener('hashchange', () => {
       //把最前面的那个# 删除 
+      console.log('window.location.hash=>', window.location.hash)
       let pathname = window.location.hash.slice(1);
       root.innerHTML = pathname;
     });
