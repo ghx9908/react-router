@@ -1,5 +1,4 @@
-function Home(props) {
-  console.log(props)
+function Home() {
   return <div>Home</div>
 }
 export default Home

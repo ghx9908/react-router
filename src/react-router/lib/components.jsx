@@ -1,4 +1,6 @@
 import React from "react"
+import { useRoutes } from "./hooks"
+import { NavigatorContext, LocationContext } from "./context"
 /**
  *
  * @param {*} children  儿子Routes 虚拟Dom
@@ -7,7 +9,13 @@ import React from "react"
  * @returns
  */
 export function Router({ children, location, navigator, navigationType }) {
-  return children
+  return (
+    <NavigatorContext.Provider value={navigator}>
+      <LocationContext.Provider value={location}>
+        {children}
+      </LocationContext.Provider>
+    </NavigatorContext.Provider>
+  )
 }
 
 /**
@@ -17,8 +25,7 @@ export function Router({ children, location, navigator, navigationType }) {
  */
 export function Routes({ children }) {
   const routes = createRoutesFromChildren(children)
-  console.log("routes=>", routes)
-  return null
+  return useRoutes(routes)
 }
 
 /**
@@ -31,7 +38,10 @@ function createRoutesFromChildren(children) {
   React.Children.forEach(children, (child) => {
     let route = {
       path: child.props.path,
-      elemetn: child.props.element,
+      element: child.props.element,
+    }
+    if (child.props.element.children) {
+      createRoutesFromChildren(child.props.element.children)
     }
     routes.push(route)
   })

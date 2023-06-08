@@ -32,7 +32,7 @@ export function BrowserRouter({ children }) {
 
 export function HashRouter({ children }) {
   const historyRef = useRef()
-  if (historyRef.current === null) {
+  if (historyRef.current == null) {
     historyRef.current = createHashHistory()
   }
   const history = historyRef.current

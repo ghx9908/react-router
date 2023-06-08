@@ -5,11 +5,11 @@ import User from "./components/User"
 import Profile from "./components/Profile"
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <BrowserRouter>
+  <HashRouter>
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/user" element={<User />} />
       <Route path="/profile" element={<Profile />} />
     </Routes>
-  </BrowserRouter>
+  </HashRouter>
 )
