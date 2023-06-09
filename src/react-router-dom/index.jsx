@@ -1,7 +1,7 @@
 import { useState, useLayoutEffect, useRef } from "react"
 import { Router, Routes, Route } from "../react-router"
 export { Route, Routes }
-import { createHashHistory, createBrowserHistory } from "@remix-run/router"
+import { createHashHistory, createBrowserHistory } from "../router"
 export function BrowserRouter({ children }) {
   const historyRef = useRef()
   if (historyRef.current == null) {
@@ -16,9 +16,7 @@ export function BrowserRouter({ children }) {
     },
     history
   )
-  useLayoutEffect(() => {
-    history.listen(setState)
-  }, [history])
+  useLayoutEffect(() => history.listen(setState), [history])
 
   return (
     <Router
