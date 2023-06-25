@@ -1,15 +1,17 @@
 import ReactDOM from "react-dom/client"
 import {
-  BrowserRouter,
   HashRouter,
+  BrowserRouter,
   Routes,
   Route,
   Link,
-} from "./react-router-dom"
+} from "react-router-dom"
 import Home from "./components/Home"
 import User from "./components/User"
 import Profile from "./components/Profile"
-import Post from "./components/Post"
+import UserAdd from "./components/UserAdd"
+import UserList from "./components/UserList"
+import UserDetail from "./components/UserDetail"
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <ul>
@@ -24,9 +26,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       </li>
     </ul>
     <Routes>
-      <Route path="/post/:id" element={<Post />} />
       <Route path="/" element={<Home />} />
-      <Route path="/user" element={<User />} />
+      <Route path="/user" element={<User />}>
+        <Route path="add" element={<UserAdd />} />
+        <Route path="list" element={<UserList />} />
+        <Route path="detail/:id" element={<UserDetail />} />
+      </Route>
       <Route path="/profile" element={<Profile />} />
     </Routes>
   </BrowserRouter>
