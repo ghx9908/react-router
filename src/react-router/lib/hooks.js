@@ -22,3 +22,14 @@ export function useRoutes(routes) {
   console.log(match)
   return match.route.element
 }
+
+export function useNavigate() {
+  let navigator = React.useContext(NavigatorContext)
+  let navigate = React.useCallback(
+    (to, state) => {
+      navigator.push(to, state)
+    },
+    [navigator]
+  )
+  return navigate
+}

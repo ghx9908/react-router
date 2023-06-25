@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect, useRef } from "react"
-import { Router, Routes, Route } from "../react-router"
+import { Router, Routes, Route, useNavigate } from "../react-router"
 export { Route, Routes }
 import { createHashHistory, createBrowserHistory } from "../router"
 export function BrowserRouter({ children }) {
@@ -52,4 +52,14 @@ export function HashRouter({ children }) {
       navigationType={state.action}
     />
   )
+}
+
+export const Link = function (props) {
+  const { to, state, ...rest } = props
+  const navigate = useNavigate()
+  function handleClick(event) {
+    event.preventDefault()
+    navigate(to, state)
+  }
+  return <a {...rest} onClick={handleClick} />
 }
