@@ -1,6 +1,6 @@
 import React from "react"
-import { useRoutes } from "./hooks"
-import { NavigatorContext, LocationContext } from "./context"
+import { useRoutes, useOutlet } from "./hooks"
+import { NavigationContext, LocationContext } from "./context"
 /**
  *
  * @param {*} children  儿子Routes 虚拟Dom
@@ -10,11 +10,11 @@ import { NavigatorContext, LocationContext } from "./context"
  */
 export function Router({ children, location, navigator, navigationType }) {
   return (
-    <NavigatorContext.Provider value={navigator}>
+    <NavigationContext.Provider value={navigator}>
       <LocationContext.Provider value={location}>
         {children}
       </LocationContext.Provider>
-    </NavigatorContext.Provider>
+    </NavigationContext.Provider>
   )
 }
 
@@ -25,8 +25,7 @@ export function Router({ children, location, navigator, navigationType }) {
  */
 export function Routes({ children }) {
   const routes = createRoutesFromChildren(children)
-  console.log("routes=>", routes)
-  return null
+  console.log("routes===>", routes)
   return useRoutes(routes)
 }
 
@@ -37,13 +36,13 @@ export function Routes({ children }) {
  */
 function createRoutesFromChildren(children) {
   const routes = []
-  React.Children.forEach(children, (child) => {
+  React.Children.forEach(children, (element) => {
     let route = {
-      path: child.props.path,
-      element: child.props.element,
+      path: element.props.path,
+      element: element.props.element,
     }
-    if (child.props.children) {
-      route.children = createRoutesFromChildren(child.props.children)
+    if (element.props.children) {
+      route.children = createRoutesFromChildren(element.props.children)
     }
     routes.push(route)
   })
@@ -55,5 +54,5 @@ export function Route({ children }) {
 }
 
 export function Outlet() {
-  return "Outlet"
+  return useOutlet()
 }
