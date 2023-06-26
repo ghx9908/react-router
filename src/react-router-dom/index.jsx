@@ -1,6 +1,14 @@
 import { useState, useLayoutEffect, useRef } from "react"
-import { Router, Routes, Route, useNavigate } from "../react-router"
-export { Route, Routes }
+import {
+  Router,
+  Routes,
+  Route,
+  useNavigate,
+  Outlet,
+  useLocation,
+  useParams,
+} from "../react-router"
+export { Route, Routes, Outlet, useNavigate, useLocation, useParams }
 import { createHashHistory, createBrowserHistory } from "../router"
 export function BrowserRouter({ children }) {
   const historyRef = useRef()

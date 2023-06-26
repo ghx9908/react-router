@@ -1,5 +1,5 @@
 import React from "react"
-import { useNavigate } from "react-router-dom"
+import { useNavigate } from "../../react-router-dom"
 import { UserAPI } from "../../utils"
 export default function UserAdd() {
   const navigate = useNavigate()

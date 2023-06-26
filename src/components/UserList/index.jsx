@@ -1,5 +1,5 @@
 import React from "react"
-import { Link } from "react-router-dom"
+import { Link } from "../../react-router-dom"
 import { UserAPI } from "../../utils"
 export default function User() {
   const [users, setUsers] = React.useState([])

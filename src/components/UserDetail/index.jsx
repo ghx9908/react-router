@@ -1,5 +1,5 @@
 import React from "react"
-import { useLocation, useParams } from "react-router-dom"
+import { useLocation, useParams } from "../../react-router-dom"
 import { UserAPI } from "../../utils"
 export default function UserDetail(props) {
   const location = useLocation()

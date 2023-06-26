@@ -19,7 +19,6 @@ export function useRoutes(routes) {
   //   }
   // }
   let match = matchRoutes(routes, { pathname })
-  console.log(match)
   return match.route.element
 }
 
@@ -32,4 +31,8 @@ export function useNavigate() {
     [navigator]
   )
   return navigate
+}
+
+export function useParams() {
+  return 1
 }
