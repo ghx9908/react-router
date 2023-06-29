@@ -6,6 +6,7 @@ import {
   Route,
   Link,
   NavLink,
+  Navigate,
 } from "./react-router-dom"
 import Home from "./components/Home"
 import User from "./components/User"
@@ -46,6 +47,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="detail/:id" element={<UserDetail />} />
       </Route>
       <Route path="/profile" element={<Profile />} />
+      <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   </BrowserRouter>
 )

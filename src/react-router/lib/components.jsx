@@ -1,5 +1,5 @@
 import React from "react"
-import { useRoutes, useOutlet } from "./hooks"
+import { useRoutes, useOutlet,useNavigate } from "./hooks"
 import { NavigationContext, LocationContext } from "./context"
 /**
  *
@@ -55,4 +55,12 @@ export function Route({ children }) {
 
 export function Outlet() {
   return useOutlet()
+}
+
+export function Navigate({ to, state }) {
+  let navigate = useNavigate()
+  React.useEffect(() => {
+    navigate(to, state)
+  })
+  return null
 }

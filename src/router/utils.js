@@ -119,6 +119,10 @@ function compilePath(path, end = true) {
         paramNames.push(paramName)
         return "/([^\\/]+)"
       })
+  if (path === "*") {
+    paramNames.push("*")
+    regexpSource += "(.*)$"
+  }
   if (end) {
     regexpSource += "$"
   }

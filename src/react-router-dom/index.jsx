@@ -9,8 +9,9 @@ import {
   Outlet,
   useLocation,
   useParams,
+  Navigate
 } from "../react-router"
-export { Route, Routes, Outlet, useNavigate, useLocation, useParams }
+export { Route, Routes, Outlet,Navigate, useNavigate, useLocation, useParams }
 import { createHashHistory, createBrowserHistory } from "../router"
 export function BrowserRouter({ children }) {
   const historyRef = useRef()
