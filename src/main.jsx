@@ -18,6 +18,7 @@ import UserList from "./components/UserList"
 import UserDetail from "./components/UserDetail"
 import Protected from "./components/Protected"
 import Login from "./components/Login"
+const LazyPost = React.lazy(() => import("./components/Post"))
 import routesConfig from "./routesConfig"
 
 const activeStyle = { backgroundColor: "green" }
@@ -28,8 +29,26 @@ const activeNavProps = {
 }
 
 function App() {
-  let [routes] = React.useState(routesConfig)
-  return <div>{useRoutes(routes)}</div>
+  let [routes, setRoutes] = React.useState(routesConfig)
+  const addRoute = () => {
+    setRoutes([
+      {
+        path: "/post",
+        element: (
+          <React.Suspense fallback={<div>loading...</div>}>
+            <LazyPost />
+          </React.Suspense>
+        ),
+      },
+      ...routes,
+    ])
+  }
+  return (
+    <div>
+      {useRoutes(routes)}
+      <button onClick={addRoute}>addRoute</button>
+    </div>
+  )
 }
 
 ReactDOM.createRoot(document.getElementById("root")).render(
@@ -48,6 +67,11 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <li>
         <NavLink to="/profile" {...activeNavProps}>
           个人中心
+        </NavLink>
+      </li>
+      <li>
+        <NavLink to="/post" {...activeNavProps}>
+          post
         </NavLink>
       </li>
     </ul>
