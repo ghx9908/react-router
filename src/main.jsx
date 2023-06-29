@@ -14,6 +14,9 @@ import Profile from "./components/Profile"
 import UserAdd from "./components/UserAdd"
 import UserList from "./components/UserList"
 import UserDetail from "./components/UserDetail"
+import Protected from "./components/Protected"
+import Login from "./components/Login"
+
 const activeStyle = { backgroundColor: "green" }
 const activeClassName = "active"
 const activeNavProps = {
@@ -46,7 +49,12 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         <Route path="list" element={<UserList />} />
         <Route path="detail/:id" element={<UserDetail />} />
       </Route>
-      <Route path="/profile" element={<Profile />} />
+      <Route
+        path="/profile"
+        element={<Protected component={Profile} path="/profile" />}
+      />
+      <Route path="/login" element={<Login />} />
+
       <Route path="*" element={<Navigate to="/" />} />
     </Routes>
   </BrowserRouter>
