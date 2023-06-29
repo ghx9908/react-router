@@ -1,17 +1,17 @@
 /* eslint-disable react/no-children-prop */
 /* eslint-disable react/prop-types */
 import { useState, useLayoutEffect, useRef } from "react"
-import {
-  Router,
+import { Router, useNavigate, useLocation } from "../react-router"
+export {
   Routes,
   Route,
-  useNavigate,
   Outlet,
   useLocation,
   useParams,
-  Navigate
+  useNavigate,
+  Navigate,
+  useRoutes,
 } from "../react-router"
-export { Route, Routes, Outlet,Navigate, useNavigate, useLocation, useParams }
 import { createHashHistory, createBrowserHistory } from "../router"
 export function BrowserRouter({ children }) {
   const historyRef = useRef()

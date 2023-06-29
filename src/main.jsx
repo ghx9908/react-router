@@ -1,3 +1,4 @@
+import React from "react"
 import ReactDOM from "react-dom/client"
 import {
   HashRouter,
@@ -7,6 +8,7 @@ import {
   Link,
   NavLink,
   Navigate,
+  useRoutes,
 } from "./react-router-dom"
 import Home from "./components/Home"
 import User from "./components/User"
@@ -16,6 +18,7 @@ import UserList from "./components/UserList"
 import UserDetail from "./components/UserDetail"
 import Protected from "./components/Protected"
 import Login from "./components/Login"
+import routesConfig from "./routesConfig"
 
 const activeStyle = { backgroundColor: "green" }
 const activeClassName = "active"
@@ -23,6 +26,12 @@ const activeNavProps = {
   style: ({ isActive }) => (isActive ? activeStyle : {}),
   className: ({ isActive }) => (isActive ? activeClassName : ""),
 }
+
+function App() {
+  let [routes] = React.useState(routesConfig)
+  return <div>{useRoutes(routes)}</div>
+}
+
 ReactDOM.createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <ul>
@@ -42,7 +51,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </NavLink>
       </li>
     </ul>
-    <Routes>
+    <App />
+    {/* <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/user" element={<User />}>
         <Route path="add" element={<UserAdd />} />
@@ -56,6 +66,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       <Route path="/login" element={<Login />} />
 
       <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+    </Routes> */}
   </BrowserRouter>
 )

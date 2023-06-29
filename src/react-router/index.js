@@ -1,5 +1,5 @@
 import { Router, Routes, Route, Outlet, Navigate } from "./lib/components"
-import { useNavigate, useLocation, useParams } from "./lib/hooks"
+import { useNavigate, useLocation, useParams, useRoutes } from "./lib/hooks"
 export {
   Router,
   Routes,
@@ -9,4 +9,5 @@ export {
   useLocation,
   useParams,
   Navigate,
+  useRoutes,
 }
