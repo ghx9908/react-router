@@ -32,6 +32,7 @@ function App() {
   let [routes, setRoutes] = React.useState(routesConfig)
   const addRoute = () => {
     setRoutes([
+      ...routes,
       {
         path: "/post",
         element: (
@@ -40,7 +41,6 @@ function App() {
           </React.Suspense>
         ),
       },
-      ...routes,
     ])
   }
   return (

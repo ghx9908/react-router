@@ -1,9 +1,62 @@
 export const joinPaths = (paths) => paths.join("/").replace(/\/\/+/g, "/")
+//如果路径中有*就减少2
+const splatPenalty = -2
+const indexRouteValue = 2
+const paramRegexp = /^:\w+$/
+const dynamicSegmentValue = 3
+const emptySegmentValue = 1
+const staticSegmentValue = 10
+const isSplat = (s) => s === "*" //console.log(computeScore('/user/*', 1));
 
+function computeScore(path, index) {
+  // /user/add
+  let segments = path.split("/") //['','user','*']//3
+  let initialScore = segments.length //3
+  if (segments.some(isSplat)) {
+    initialScore += splatPenalty //1
+  }
+  if (typeof index !== "undefined") {
+    initialScore += indexRouteValue //3
+  }
+  //['','user','*']=>['','user']
+  return segments
+    .filter((s) => !isSplat(s))
+    .reduce((score, segment) => {
+      let currentScope = 0
+      //如果这个片断是路径参数的话 :id
+      if (paramRegexp.test(segment)) {
+        currentScope += dynamicSegmentValue
+      } else {
+        if (segment === "") {
+          currentScope += emptySegmentValue
+        } else {
+          currentScope += staticSegmentValue
+        }
+      }
+      score += currentScope
+      return score
+    }, initialScore)
+}
+function rankRouteBranches(branches) {
+  branches.sort((a, b) =>
+    a.score !== b.score
+      ? b.score - a.score
+      : compareIndexes(
+          a.routesMeta.map((meta) => meta.childrenIndex),
+          b.routesMeta.map((meta) => meta.childrenIndex)
+        )
+  )
+}
+function compareIndexes(a, b) {
+  let siblings =
+    a.length === b.length && a.slice(0, -1).every((n, i) => n === b[i])
+  return siblings ? a[a.length - 1] - b[b.length - 1] : 0
+}
 export function matchRoutes(routes, location) {
   let { pathname } = location
   // 将嵌套的路由数组扁平化
   let branches = flattenRoutes(routes)
+  rankRouteBranches(branches)
   console.log("branches====>", branches)
   let matches = null
   for (let i = 0; matches == null && i < branches.length; ++i) {
@@ -81,7 +134,7 @@ function flattenRoutes(
       flattenRoutes(route.children, branches, routesMeta, path)
     }
     // 将路径和元数据对象添加到结果数组中
-    branches.push({ path, routesMeta })
+    branches.push({ path, routesMeta, score: computeScore(path, route.index) })
   }
   // 遍历路由数组，调用内部函数处理每个路由对象
   routes.forEach((route, index) => {
