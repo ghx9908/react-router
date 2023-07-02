@@ -29,7 +29,7 @@
     //
     historyObj.pushState = function (state, title, url) {
       oldPushState.apply(historyObj, arguments);
-      render();
+      // render();
     }
     function go(path) {
       historyObj.pushState({ path }, null, path);

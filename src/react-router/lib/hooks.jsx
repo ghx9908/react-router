@@ -35,7 +35,7 @@ export function useNavigate() {
   let navigator = React.useContext(NavigationContext)
   let navigate = React.useCallback(
     (to, state) => {
-      navigator.push(to, state) // 调用 react-router 的 navigator.push 方法
+      navigator.push(to, state)
     },
     [navigator]
   )

@@ -9,7 +9,7 @@ import Login from "./components/Login"
 import Protected from "./components/Protected"
 const routes = [
   { path: "/", element: <Home /> },
-  { path: "/profile", element: <Profile /> },
+  // { path: "/profile", element: <Profile /> },
   {
     path: "user",
     element: <User />,
@@ -19,8 +19,8 @@ const routes = [
       { path: "detail/:id", element: <UserDetail /> },
     ],
   },
-  { path: "/profile", element: <Protected component={Profile} /> },
-  { path: "/login", element: <Login /> },
+  // { path: "/profile", element: <Protected component={Profile} /> },
+  // { path: "/login", element: <Login /> },
   { path: "*", element: <NotFound /> },
 ]
 export default routes

@@ -20,13 +20,10 @@ export function BrowserRouter({ children }) {
   }
   const history = historyRef.current
 
-  const [state, setState] = useState(
-    {
-      location: history.location,
-      action: history.action,
-    },
-    history
-  )
+  const [state, setState] = useState({
+    location: history.location,
+    action: history.action,
+  })
   useLayoutEffect(() => history.listen(setState), [history])
 
   return (
